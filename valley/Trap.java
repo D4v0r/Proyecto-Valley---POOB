@@ -98,10 +98,8 @@ public class Trap implements Comparable <Trap>
     
     public void makeVisible(){
         isVisible=true;
-        if(punctures.size() > 0){
-            for(Puncture p: punctures){
-                p.makeInvisible();
-            }
+        for(Puncture p: punctures){
+                p.makeVisible();
         }
         line.makeVisible();
     }
@@ -109,10 +107,8 @@ public class Trap implements Comparable <Trap>
     public void makeInvisible(){
         isVisible=false;
         line.makeInvisible();
-        if(punctures.size() > 0){
-            for(Puncture p: punctures){
-                p.makeVisible();
-            }
+        for(Puncture p: punctures){
+                p.makeInvisible();
         }
     }
     

@@ -191,11 +191,6 @@ public class Valley
         }
     }
     
-    /**
-     * Evaluamos el caso cuando se debe crear el hueco en una lona con direccion contraria
-     * @param x1,x2,y1,y2,x,y son las posiciones de el corte y de la lona, m,b la pendiente y el corte
-     */
-    /*
     public void stopRain(int position){
         Collections.sort(rains);
         rains.get(position-1).makeInvisible();
@@ -216,10 +211,14 @@ public class Valley
         
     }
     
-    /**
-     * Empieza a caer la lluvia
-     * @param x represeta la posicion en donde empieza la lluvia
-     */
+    public String[] rainFalls(){
+        String[] wateredVineyards = new String[vineyards.size()];
+        for(int i = 0; i < vineyards.size(); i++){
+            Vineyard v = vineyards.get(i);
+            wateredVineyards[i] = (v.isWatered())? v.getName() : null;
+        }
+        return wateredVineyards;
+    }
     
     public void makeVisible(){
         //Canvas canvas = Canvas.getCanvas(height, width);

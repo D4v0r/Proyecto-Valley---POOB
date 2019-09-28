@@ -51,7 +51,7 @@ public class Rain implements Comparable <Rain>
         boolean noChoco=true;
         ArrayList<Vineyard> vineyards = Valley.getVineyards();
         ArrayList<Trap> traps = Valley.getTraps();
-        while (yPosition<Valley.getHeight() && noChoco){
+        while (yPosition < Valley.getHeight() && noChoco){
             Rectangle gota = new Rectangle();
             gota.changeColor("blue");
             gota.moveHorizontal(xPosition);

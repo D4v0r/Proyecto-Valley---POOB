@@ -49,6 +49,10 @@ public class Vineyard
         isWatered = action;
     }
     
+    public boolean isWatered(){
+        return isWatered;
+    }
+    
     /**
      * An example of a method - replace this comment with your own
      * 
