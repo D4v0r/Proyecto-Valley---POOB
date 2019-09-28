@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=Vineyard
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Vineyard\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=name\ xi\ xf
+comment1.target=Vineyard(java.lang.String,\ int,\ int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Vineyard\r\n
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=
+comment3.target=int\ getPosition()
+comment4.params=
+comment4.target=int\ getWidth()
+comment5.params=action
+comment5.target=void\ water(boolean)
+comment6.params=
+comment6.target=void\ open()
+comment6.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \r\n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \r\n
+comment7.params=
+comment7.target=void\ close()
+comment8.params=
+comment8.target=void\ makeVisible()
+comment9.params=
+comment9.target=void\ makeInvisible()
+numComments=10
