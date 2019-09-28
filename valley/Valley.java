@@ -17,7 +17,7 @@ public class Valley
 {
     private static int width,height;
     private static ArrayList<Vineyard> vineyards;
-    //private ArrayList<Rain> rains;
+    private ArrayList<Rain> rains;
     private static ArrayList<Trap> traps;
     private boolean isVisible;
     private boolean ok;
@@ -29,7 +29,7 @@ public class Valley
      */
     public Valley(int width, int height){
         
-        //rains= new ArrayList<>();
+        rains= new ArrayList<>();
         vineyards = new ArrayList<>();
         this.width=width;
         this.height=height;
@@ -205,17 +205,17 @@ public class Valley
      * Empieza a caer la lluvia
      * @param x represeta la posicion en donde empieza la lluvia
      */
-    /*
+    
     public void startRain(int x){
         Rain rain = new Rain(x);
-        rain.start(height);
+        rain.start(x);
         rains.add(rain);
         if(isVisible){
             draw();
         }
         
     }
-    */
+    
     /**
      * Empieza a caer la lluvia
      * @param x represeta la posicion en donde empieza la lluvia
@@ -236,11 +236,11 @@ public class Valley
         for (Trap t : traps){
             t.makeVisible();
         }
-        /*
-        for(Rain r: rains){
-            r.makeVisible();
+        if (rains.size()>0){
+            for(Rain r: rains){
+                r.makeVisible();
+            }
         }
-        */
     }
     
     public static void water(int position){

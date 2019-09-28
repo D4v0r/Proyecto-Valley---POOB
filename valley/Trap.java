@@ -85,10 +85,9 @@ public class Trap implements Comparable <Trap>
     
     public double rectFunction(double x){
         double[] point = {(double) lowerEnd[0], (double) higherEnd[1]};
-        double y = 0;
-        double m = line.getSlope() * -1;
-        double b = point[1] / (m * point[0]);
-        return ( m * x + b);
+        double m = (double) (higherEnd[1]-lowerEnd[1])/ (higherEnd[0]-lowerEnd[0]);
+        double b = lowerEnd[1]-(m*lowerEnd[0]);
+        return ( (m * x) + b);
     }
     
     public void remove(){

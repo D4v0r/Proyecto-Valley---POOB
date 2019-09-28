@@ -29,8 +29,8 @@ public class Puncture
     }
     
     public void open(){
-        point.setXposition(xPosition - 3.1622776601683795);
-        point.setYPosition(yPosition - 3.1622776601683795);
+        point.setXposition(xPosition - Math.sqrt(10));
+        point.setYPosition(yPosition - Math.sqrt(10));
         point.changeColor(color);
         point.changeSize(10);
         

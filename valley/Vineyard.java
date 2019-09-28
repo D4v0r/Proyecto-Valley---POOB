@@ -29,6 +29,10 @@ public class Vineyard
         filling = new Rectangle();
     }
     
+    public int getPositionY(){
+        return (int)filling.getPositionY();
+    }
+    
     public String getName(){
         return name;
     }
