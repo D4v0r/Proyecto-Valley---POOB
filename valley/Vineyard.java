@@ -63,8 +63,8 @@ public class Vineyard
     {
         // put your code here
         int limitHeight = Valley.getHeight();
-        filling.moveHorizontal(xInicial-1);
-        filling.moveVertical(limitHeight-11);
+        filling.moveHorizontal(xInicial);
+        filling.moveVertical(limitHeight-5);
         filling.changeSize(5, xFinal - xInicial);
         filling.randomColor();
     }

@@ -212,9 +212,16 @@ public class Valley
     }
     
     public String[] rainFalls(){
-        String[] wateredVineyards = new String[vineyards.size()];
-        for(int i = 0; i < vineyards.size(); i++){
-            Vineyard v = vineyards.get(i);
+        ArrayList<Vineyard> watered = new ArrayList<>();
+        for(Vineyard v: vineyards){
+            if(v.isWatered()){
+                watered.add(v);
+            }
+        }
+        
+        String[] wateredVineyards = new String[watered.size()];
+        for(int i = 0; i < watered.size(); i++){
+            Vineyard v = watered.get(i);
             wateredVineyards[i] = (v.isWatered())? v.getName() : null;
         }
         return wateredVineyards;
