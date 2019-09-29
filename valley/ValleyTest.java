@@ -28,50 +28,53 @@ public class ValleyTest
     
     @Test
     public void deberiaAbrirViñedo(){
-        valley.openVineyard("v1", 10, 40);
+        valley.openVineyard("yellow", 10, 40);
         assertTrue(valley.ok());
     }
     
     @Test
     public void NoDeberiaAbrirViñedo(){
-        valley.openVineyard("v1", 10, 40);
-        valley.openVineyard("v1", 10, 40);
+        valley.openVineyard("yellow", 10, 40);
+        valley.openVineyard("yellow", 10, 40);
         assertFalse(valley.ok());
         
-        valley.openVineyard("v1", 30, 70);
+        valley.openVineyard("yellow", 30, 70);
         assertFalse(valley.ok());
         
-        valley.openVineyard("v2", 40, 90);
+        valley.openVineyard("magenta", 40, 90);
         assertFalse(valley.ok());
         
-        valley.openVineyard("v2", 30, 90);
+        valley.openVineyard("magenta", 30, 90);
         assertFalse(valley.ok());
         
-        valley.openVineyard("v2", 30, 30);
+        valley.openVineyard("magenta", 30, 30);
         assertFalse(valley.ok());
         
-        valley.openVineyard("v2", 30, 20);
+        valley.openVineyard("magenta", 30, 20);
         assertFalse(valley.ok());
         
-        valley.openVineyard("v2", 300, 350);
+        valley.openVineyard("magenta", 300, 350);
         assertFalse(valley.ok());
         
-        valley.openVineyard("v2", -20, 40);
+        valley.openVineyard("magenta", -20, 40);
+        assertFalse(valley.ok());
+        
+        valley.openVineyard("v", 50, 80);
         assertFalse(valley.ok());
         
     }
     
     @Test
     public void deberiaCerrarViñedo(){
-        valley.openVineyard("v1", 10, 40);
-        valley.closeVineyard("v1");
+        valley.openVineyard("yellow", 10, 40);
+        valley.closeVineyard("yellow");
         assertTrue(valley.ok());
         
     }
     
     @Test
     public void noDeberiaCerrarViñedo(){
-        valley.openVineyard("v1", 10, 40);
+        valley.openVineyard("yellow", 10, 40);
         valley.closeVineyard("v");
         assertFalse(valley.ok());
     }

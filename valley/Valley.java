@@ -92,16 +92,21 @@ public class Valley
     private boolean noEsPosible(String name, int xi, int xf) {
        boolean respuesta = false;
        int longitud = xf - xi;
+       String colors[]={"red","yellow","blue","black","brown","magenta","grey","fucsia"};
        if ((xi >= width) || ( longitud > width) || (xi >= xf) || (xi < 1) || (xf < 1) ){
             respuesta=true;
        } else{
-            
-            for(Vineyard v: vineyards){
+           int contador = colors.length;
+           for (String color: colors){
+               contador = (color.equals(name)) ? contador: contador - 1;
+           }
+           respuesta = (contador == 0)? true: respuesta;
+           for(Vineyard v: vineyards){
                 int x = v.getPosition();
                 if ((xi >=  x && xi <= v.getWidth() + x) || (name == v.getName())) {
                     respuesta =  true;
                 }
-            }
+           }
        }
         return respuesta;
     }
@@ -207,8 +212,7 @@ public class Valley
         rains.add(rain);
         if(isVisible){
             draw();
-        }
-        
+        } 
     }
     
     public String[] rainFalls(){
@@ -242,10 +246,9 @@ public class Valley
         for (Trap t : traps){
             t.makeVisible();
         }
-        if (rains.size()>0){
-            for(Rain r: rains){
+        
+        for(Rain r: rains){
                 r.makeVisible();
-            }
         }
     }
     
@@ -255,6 +258,10 @@ public class Valley
     
     public static int getHeight(){
         return height;
+    }
+    
+    public void paintTrap(){
+        
     }
     
     /**

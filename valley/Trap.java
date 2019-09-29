@@ -33,8 +33,20 @@ public class Trap implements Comparable <Trap>
         double [] point1 = { (double) lowerEnd[0], (double) (limitHeight - lowerEnd[1])};
         double [] point2 = { (double) higherEnd[0], (double) (limitHeight - higherEnd[1])};
         line = new Line(point1, point2);
-        
+        belongingTo(this.lowerEnd[0], this.higherEnd[0]);
     }
+    
+    public void belongingTo(int x1, int x2){
+        ArrayList<Vineyard> vineyards = Valley.getVineyards();
+        for(Vineyard v: vineyards){
+            int xi = v.getPosition();
+            int xf = v.getPosition() + v.getWidth();
+            if ((xi == x1 && xf == x2) || (xi == x2 && xf == x1)){
+                String newColor = v.getColor();
+                changeColor(newColor);
+            }
+        }
+    } 
     
     public int[] getLowerEnd(){
         return lowerEnd;
@@ -119,6 +131,11 @@ public class Trap implements Comparable <Trap>
         for(Puncture p: punctures){
                 p.makeInvisible();
         }
+    }
+    
+    public void changeColor(String color){
+        this.color = color;
+        line.changeColor(color);
     }
     
     @Override 

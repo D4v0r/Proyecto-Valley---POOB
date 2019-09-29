@@ -25,12 +25,8 @@ public class Vineyard
         xInicial = xi;
         xFinal = xf;
         isVisible = false;
-        color = "magenta";
+        color = name;
         filling = new Rectangle();
-    }
-    
-    public int getPositionY(){
-        return (int)filling.getPositionY();
     }
     
     public String getName(){
@@ -66,13 +62,17 @@ public class Vineyard
         filling.moveHorizontal(xInicial);
         filling.moveVertical(limitHeight-5);
         filling.changeSize(5, xFinal - xInicial);
-        filling.randomColor();
+        filling.changeColor(name);
     }
     
     public void close()
     {
         makeInvisible();
         filling = null;
+    }
+    
+    public String getColor(){
+        return color;
     }
     
     public void makeVisible()
