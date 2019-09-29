@@ -125,37 +125,65 @@ public class Rain implements Comparable <Rain>{
      * 
      */
     private double[] collisionWith(ArrayList<Trap> traps,double xNow){
-        boolean colision=false;
-        boolean colisionP=false;
-        double[] rta={0,0};
+        boolean colisionTrap=false;
+        boolean colisionWithPuncture=false;
         double m=0.0;
         double b=0.0;
         int pos=0;
-        while (!colision && pos<traps.size()){
+        boolean estaEnRangoX;
+        boolean estaEnRangoY;
+        while (!colisionTrap && pos<traps.size()){
             int x0 = traps.get(pos).getLowerEnd()[0];
             int y0 = traps.get(pos).getLowerEnd()[1];
             int x1 = traps.get(pos).getHigherEnd()[0];
             int y1 = traps.get(pos).getHigherEnd()[1];
             m = (double) (y1-y0)/(x1-x0);
             b = y0-(m*x0);
-            double y = (double) (m*xNow)+b;
-            if (yPosition>=(Valley.getHeight()-y-10) && ((xPosition>=x0 && xPosition<=x1)||(xPosition>=x1 && xPosition<=x0))){
-                colision=true;
+            double y = (double) (m*xPosition)+b;
+            estaEnRangoX= estaEnRangoX(x0,x1);
+            estaEnRangoY= estaEnRangoY(y0,y1);
+            if (yPosition>=(Valley.getHeight()-y-10) && estaEnRangoX && estaEnRangoY){
+                colisionTrap=true;
                 if (traps.get(pos).collisionPuncture((int)xPosition)){
-                    colisionP=true;
+                    colisionWithPuncture=true;
                 }
             }
             pos++;
         }
-        if (colisionP){
-            rta[0]= 2.0;
-        }
-        else if (colision){
-            rta[0] = 1.0;
-            rta[1] = m;
-        }
-        return rta;
+        return returnValues(colisionWithPuncture,colisionTrap, m);
     }
+    
+    private double[] returnValues(boolean colisionWithPuncture, boolean colisionTrap, double pendiente){
+        double[] values={0,0};
+        if (colisionWithPuncture){
+            values[0]=2.0;
+        } else if (colisionTrap){
+            values[0]=1.0;
+            values[1]=pendiente;
+        }
+        return values;
+    }
+    
+    private boolean estaEnRangoX(int x0,int x1){
+        boolean estaEnRangoX =false;
+        if (x0<x1){
+            estaEnRangoX=(xPosition>=x0 && xPosition<=x1);
+        }else{
+            estaEnRangoX=(xPosition>=x1 && xPosition<=x0);
+        }
+        return estaEnRangoX;
+    }
+    
+    private boolean estaEnRangoY(int y0, int y1){
+        boolean estaEnRangoY=false;
+        if (y0<y1){
+            estaEnRangoY=(Valley.getHeight()-yPosition>=y0 && Valley.getHeight()-yPosition<=y1);
+        } else{
+            estaEnRangoY=(Valley.getHeight()-yPosition>=y1 && Valley.getHeight()-yPosition<=y0);
+        }
+        return estaEnRangoY;
+    }
+    
     
     /**
      * 
