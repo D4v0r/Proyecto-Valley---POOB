@@ -110,10 +110,10 @@ public class Rain implements Comparable <Rain>{
      */
     private int vineyardCollision(ArrayList<Vineyard> vineyards, double y, double x){
         int vineyard = -1;
-        int vineyardPositionY = Valley.getHeight()-10;
+        int vineyardPositionY = Valley.getHeight() - 10; 
         for (Vineyard v : vineyards){
-            if (vineyardPositionY >=y && x>=v.getPosition() && x<=v.getPosition()+v.getWidth()){
-                 vineyard = vineyards.indexOf(v);
+            if (vineyardPositionY >=y && x>=v.getPosition() && x<=v.getWidth()){
+                vineyard = vineyards.indexOf(v);
             }
         }
         return vineyard;
