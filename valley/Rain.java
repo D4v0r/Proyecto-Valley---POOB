@@ -51,7 +51,7 @@ public class Rain implements Comparable <Rain>
         boolean noChoco=true;
         ArrayList<Vineyard> vineyards = Valley.getVineyards();
         ArrayList<Trap> traps = Valley.getTraps();
-        while (yPosition < Valley.getHeight() && noChoco){
+        while (yPosition<Valley.getHeight() && noChoco){
             Rectangle gota = new Rectangle();
             gota.changeColor("blue");
             gota.moveHorizontal(xPosition);
@@ -64,10 +64,12 @@ public class Rain implements Comparable <Rain>
                     Valley.water(vineyard);
                     noChoco = false;
                 }
-                
             }
             double rta[] = collisionWith(traps,xNow);
-            if (rta[0]==1.0){
+            if (rta[0]==2.0){
+                yPosition++;
+            }
+            else if (rta[0]==1.0){
                 yPosition+=Math.abs(rta[1]);
                 if (rta[1]<0){
                     xPosition++;
@@ -101,6 +103,7 @@ public class Rain implements Comparable <Rain>
      */
     private double[] collisionWith(ArrayList<Trap> traps,double xNow){
         boolean colision=false;
+        boolean colisionP=false;
         double[] rta={0,0};
         double m=0.0;
         double b=0.0;
@@ -115,10 +118,16 @@ public class Rain implements Comparable <Rain>
             double y = (double) (m*xNow)+b;
             if (yPosition>=(Valley.getHeight()-y-10) && ((xPosition>=x0 && xPosition<=x1)||(xPosition>=x1 && xPosition<=x0))){
                 colision=true;
+                if (traps.get(pos).collisionPuncture((int)xPosition)){
+                    colisionP=true;
+                }
             }
             pos++;
         }
-        if (colision){
+        if (colisionP){
+            rta[0]=2.0;
+        }
+        else if (colision){
             rta[0] = 1.0;
             rta[1] = m;
         }

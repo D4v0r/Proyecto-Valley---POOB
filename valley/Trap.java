@@ -48,6 +48,15 @@ public class Trap implements Comparable <Trap>
         return punctures;
     }
     
+    public boolean collisionPuncture(int x){
+        boolean rta=false;
+        for (Puncture p: punctures){
+            if (x==p.getXPosition()-1 || x==p.getXPosition()+1){
+                rta=true;
+            }
+        }
+        return rta;
+    }
     /**
      * Agrega un hueco en una lona
      * @param trap es la ubicacion de la lona en la lista, x la posicion de la misma
