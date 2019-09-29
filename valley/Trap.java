@@ -57,6 +57,7 @@ public class Trap implements Comparable <Trap>
         }
         return rta;
     }
+    
     /**
      * Agrega un hueco en una lona
      * @param trap es la ubicacion de la lona en la lista, x la posicion de la misma

@@ -8,8 +8,7 @@ import shapes.*;
  * @version (a version number or a date)
  */
 
-public class Rain implements Comparable <Rain>
-{
+public class Rain implements Comparable <Rain>{
     private double xPosition;
     private double yPosition;
     private boolean isVisible;
@@ -44,7 +43,8 @@ public class Rain implements Comparable <Rain>
     }
     
     /**
-     * 
+     * Empieza a correr el agua
+     * @param x siendo la posicion de la lluvia
      */
     public void start(int x){
         int xNow=x;
@@ -53,9 +53,6 @@ public class Rain implements Comparable <Rain>
         ArrayList<Trap> traps = Valley.getTraps();
         while (yPosition<Valley.getHeight() && noChoco){
             Rectangle gota = new Rectangle();
-            gota.changeColor("blue");
-            gota.moveHorizontal(xPosition);
-            gota.changeSize(5,5);
             if (yPosition >= Valley.getHeight()-10){
                 int vineyard = vineyardCollision(vineyards, yPosition, xPosition);
                 if( vineyard == -1){
@@ -65,40 +62,66 @@ public class Rain implements Comparable <Rain>
                     noChoco = false;
                 }
             }
-            double rta[] = collisionWith(traps,xNow);
-            if (rta[0]==2.0){
-                yPosition++;
-            }
-            else if (rta[0]==1.0){
-                yPosition+=Math.abs(rta[1]);
-                if (rta[1]<0){
-                    xPosition++;
-                }else{
-                    xPosition--;
-                }
-            } else{
-                yPosition++;
-            }
-            gota.setXposition(xPosition);
-            gota.setYposition(yPosition);
+            rainOnTrap(traps,xNow);
+            gota = doRectangle();
             stream.add(gota);
         }
     }
     
     /**
+     * Crea un rectangulo que sera una parte de la lluvia
+     */
+    private Rectangle doRectangle(){
+        Rectangle rect = new Rectangle();
+        rect.changeColor("blue");
+        rect.moveHorizontal(xPosition);
+        rect.changeSize(5,5);
+        rect.setXposition(xPosition);
+        rect.setYposition(yPosition);
+        return rect;
+    }
+    
+    /**
+     * 
+     * @param traps lista de lonas, la posicion de el agua,
+     */
+    private void rainOnTrap(ArrayList<Trap> traps, int xNow){
+        double rta[] = collisionWith(traps,xNow);
+        if (rta[0]==2.0){
+            yPosition++;
+        }
+        else if (rta[0]==1.0){
+            yPosition+=Math.abs(rta[1]);
+            if (rta[1]<0){
+                xPosition++;
+            }else{
+                xPosition--;
+            }
+        } else{
+            yPosition++;
+        }
+    }
+    
+    
+    /**
+     * Verifica la colision contra un viñedo
+     * @param vineyards la lista de los viñedos, 
      * 
      */
     private int vineyardCollision(ArrayList<Vineyard> vineyards, double y, double x){
         int vineyard = -1;
+        int vineyardPositionY = Valley.getHeight()-10;
         for (Vineyard v : vineyards){
-            if (v.getPositionY()>=y && x>=v.getPosition() && x<=v.getWidth()){
-                vineyard = vineyards.indexOf(v);
+            if (vineyardPositionY >=y && x>=v.getPosition() && x<=v.getPosition()+v.getWidth()){
+                 vineyard = vineyards.indexOf(v);
             }
         }
         return vineyard;
     }
 
     /**
+     * Verifica la colision de la lluvia con alguna lona
+     * @param traps la lista de lonas, 
      * 
      */
     private double[] collisionWith(ArrayList<Trap> traps,double xNow){
@@ -125,7 +148,7 @@ public class Rain implements Comparable <Rain>
             pos++;
         }
         if (colisionP){
-            rta[0]=2.0;
+            rta[0]= 2.0;
         }
         else if (colision){
             rta[0] = 1.0;
