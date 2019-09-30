@@ -199,6 +199,7 @@ public class Valley
     public void stopRain(int position){
         Collections.sort(rains);
         rains.get(position-1).makeInvisible();
+        ok = true;
     }
     
     /**
@@ -260,9 +261,6 @@ public class Valley
         return height;
     }
     
-    public void paintTrap(){
-        
-    }
     
     /**
      * 
@@ -282,6 +280,33 @@ public class Valley
         isVisible = false;
         canvas.setVisible(isVisible);
         
+    }
+    
+    public int [][][] traps(){
+        int [][][] query = new int [traps.size()][3][];
+        int i = 0;
+        for(Trap t: traps){
+            for(int j = 0; j < 3; j++){
+                if(j == 0){
+                    query[i][j] = new int[2];
+                    query[i][j][0] = t.getLowerEnd()[0];
+                    query[i][j][1] = t.getLowerEnd()[1];
+                } else if (j == 1){
+                    query[i][j] = new int[2];
+                    query[i][j][0] = t.getHigherEnd()[0];
+                    query[i][j][1] = t.getHigherEnd()[1];
+                } else {
+                    query[i][j] = new int[t.getPunctures().size()];
+                    int k = 0;
+                    for (Puncture p: t.getPunctures()){
+                        query[i][j][k] = (int) p.getXPosition();
+                        k++;
+                    }
+                }    
+            }
+            i++;
+        }
+        return query;
     }
     
     /**
