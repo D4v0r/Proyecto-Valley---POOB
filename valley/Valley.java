@@ -172,6 +172,10 @@ public class Valley
         }
     }
     
+    /**
+     * tapa un hueco si es posible
+     * @param trap la lona, x la posicion del hueco
+     */
     public void patchPuncture(int trap, int x){
         trap--;
         if  (trap > traps.size()){
@@ -196,26 +200,38 @@ public class Valley
         }
     }
     
+    /**
+     * detiene una lluvia
+     * @param position, la posicion de la lluvia
+     */
     public void stopRain(int position){
         Collections.sort(rains);
-        rains.get(position-1).makeInvisible();
-        ok = true;
+        try{
+            rains.get(position-1).makeInvisible();
+            ok=true;
+        }catch(IndexOutOfBoundsException e){
+            ok=false;   
+        }
     }
     
     /**
      * Empieza a caer la lluvia
      * @param x represeta la posicion en donde empieza la lluvia
      */
-    
     public void startRain(int x){
         Rain rain = new Rain(x);
         rain.start(x);
         rains.add(rain);
         if(isVisible){
             draw();
-        } 
+        }
+        ok=true;
     }
     
+    /**
+     * retorna las lluvias activas
+     * @return String[] lista con las lluvias activas
+     */
     public String[] rainFalls(){
         ArrayList<Vineyard> watered = new ArrayList<>();
         for(Vineyard v: vineyards){
@@ -223,21 +239,28 @@ public class Valley
                 watered.add(v);
             }
         }
-        
         String[] wateredVineyards = new String[watered.size()];
         for(int i = 0; i < watered.size(); i++){
             Vineyard v = watered.get(i);
             wateredVineyards[i] = (v.isWatered())? v.getName() : null;
         }
+        ok=true;
         return wateredVineyards;
     }
     
+    /**
+     * hace visible el valle si es posible
+     */
     public void makeVisible(){
         //Canvas canvas = Canvas.getCanvas(height, width);
         isVisible = true;
         draw();
+        ok=true;
     }
     
+    /**
+     * dibuja el valle
+     */
     private void draw(){
         canvas = canvas.getCanvas(height, width);
         for (Vineyard v: vineyards){
@@ -253,22 +276,31 @@ public class Valley
         }
     }
     
+    /**
+     * 
+     */
     public static void water(int position){
         vineyards.get(position).water(true);
     }
     
+    /**
+     * retorna el alto del vally
+     */
     public static int getHeight(){
         return height;
     }
     
     
     /**
-     * 
+     * retorna las lonas
      */
     public static ArrayList<Trap> getTraps(){
         return traps;
     }
     
+    /**
+     * retorna los viñedos
+     */
     public static ArrayList<Vineyard> getVineyards(){
         return vineyards;
     }
@@ -279,9 +311,13 @@ public class Valley
     public void makeInvisible(){
         isVisible = false;
         canvas.setVisible(isVisible);
-        
+        ok=true;
     }
     
+    /**
+     * retorna las posiciones de las lonas y de los huecos 
+     * @return una matriz con listas de las posiciones de las lonas consus huecos
+     */
     public int [][][] traps(){
         int [][][] query = new int [traps.size()][3][];
         int i = 0;
@@ -306,11 +342,32 @@ public class Valley
             }
             i++;
         }
+        int[][][] vacio={{{}}};
+        if (query==vacio){
+            ok=false;
+        } else{
+            ok=true;
+        }
         return query;
     }
     
     /**
-     * 
+     * hacer zoom a toda la ciudad
+     * @param signo puede ser + / -
+     */
+    public void zoom(char signo){      
+        if (signo=='+' || signo=='-'){
+            Canvas canvas = Canvas.getCanvas();
+            canvas.zoom(signo);
+            ok=true;
+        }
+        else{
+            ok = false;
+        }
+    }
+    
+    /**
+     * Termina el programa
      */
     public void finish(){
         System.exit(0);

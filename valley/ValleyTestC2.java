@@ -38,6 +38,62 @@ public class ValleyTestC2
         assertEquals(valley.traps(), esperado);
         
     }
+    
+    @Test
+    public void noDeberiaEstarRegado(){
+        int[] x0 = {150,150};
+        int[] x1 = {450,300};
+        int[] x2 = {300,400};
+        int[] x3 = {400,330};
+        valley.addTrap(x0,x1);
+        valley.addTrap(x2,x3);
+        valley.openVineyard("red",300,400);
+        valley.startRain(330);
+        assertFalse(valley.getVineyards().get(0).isWatered());
+    }
+    
+    @Test
+    public void deberiaTenerHueco(){
+        int[] x0 = {150,150};
+        int[] x1 = {450,300};
+        int[] x2 = {300,400};
+        int[] x3 = {400,330};
+        valley.addTrap(x0,x1);
+        valley.addTrap(x2,x3);
+        valley.makePuncture(1,225);
+        valley.makePuncture(4,123);
+        valley.makePuncture(2,310);
+        assertTrue(valley.getTraps().get(0).getPunctures().size()==1);
+    }
+     
+    @Test
+    public void noDeberiaTenerHuecos(){
+        int[] x0 = {150,150};
+        int[] x1 = {450,300};
+        int[] x2 = {300,400};
+        int[] x3 = {400,330};
+        valley.addTrap(x0,x1);
+        valley.addTrap(x2,x3);
+        valley.makePuncture(1,455);
+        valley.makePuncture(1,123);
+        valley.makePuncture(2,299);
+        assertFalse(valley.getTraps().get(0).getPunctures().size()==1);
+    }
+    
+    @Test
+    public void deberiaEstarRegado(){
+        int[] x0 = {150,150};
+        int[] x1 = {450,300};
+        int[] x2 = {300,400};
+        int[] x3 = {400,330};
+        valley.addTrap(x0,x1);
+        valley.addTrap(x2,x3);
+        valley.openVineyard("red",50,200);
+        valley.startRain(330);
+        assertTrue(!valley.getVineyards().get(0).isWatered());
+    }    
+    
+    
     /**
      * Tears down the test fixture.
      *

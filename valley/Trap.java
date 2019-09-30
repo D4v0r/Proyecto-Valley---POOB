@@ -48,18 +48,30 @@ public class Trap implements Comparable <Trap>
         }
     } 
     
+    /**
+     * retorna las posiciones iniciales 
+     */
     public int[] getLowerEnd(){
         return lowerEnd;
     }
     
+    /**
+     * retorna las posiciones finales
+     */
     public int[] getHigherEnd(){
         return higherEnd;
     }
     
+    /**
+     * retorna los huecos que tenga
+     */
     public ArrayList<Puncture> getPunctures(){
         return punctures;
     }
     
+    /**
+     * verifica si colisiono con un hueco
+     */
     public boolean collisionPuncture(int x){
         boolean rta=false;
         for (Puncture p: punctures){
@@ -85,6 +97,10 @@ public class Trap implements Comparable <Trap>
         }
     }
     
+    /**
+     * tapa un hueco 
+     * @param int x la posicion a tapar
+     */
     public void patchPuncture(int x){
         if(punctures.size() > 0){
             int position = 0;
@@ -105,6 +121,10 @@ public class Trap implements Comparable <Trap>
         }
     }
     
+    /**
+     * calcula el valor Y de la ecuacion de la lona dado un punto x
+     * @param double x, el valor en x
+     */
     public double rectFunction(double x){
         double[] point = {(double) lowerEnd[0], (double) higherEnd[1]};
         double m = (double) (higherEnd[1]-lowerEnd[1])/ (higherEnd[0]-lowerEnd[0]);
@@ -112,12 +132,18 @@ public class Trap implements Comparable <Trap>
         return ( (m * x) + b);
     }
     
+    /**
+     * borra una lona
+     */
     public void remove(){
         makeInvisible();
         punctures = null;
         line = null;
     }
     
+    /**
+     * hace visible la lona si es posible
+     */
     public void makeVisible(){
         isVisible=true;
         for(Puncture p: punctures){
@@ -126,6 +152,9 @@ public class Trap implements Comparable <Trap>
         line.makeVisible();
     }
     
+    /**
+     * hace invisible la lona si es posible
+     */
     public void makeInvisible(){
         isVisible=false;
         line.makeInvisible();
@@ -134,6 +163,10 @@ public class Trap implements Comparable <Trap>
         }
     }
     
+    /**
+     * cambia el color de la lona
+     * @param String color, el color a cambiar
+     */
     public void changeColor(String color){
         this.color = color;
         line.changeColor(color);

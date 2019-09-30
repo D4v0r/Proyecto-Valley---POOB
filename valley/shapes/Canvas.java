@@ -97,6 +97,23 @@ public class Canvas{
         }
         frame.setVisible(visible);
     }
+    
+    public void zoom(char signo){
+        double valor =1.0;
+        if (signo=='+'){
+            valor+=0.1;
+            erase();
+            graphic.scale(valor,valor);
+            redraw();            
+        }
+        else if(signo=='-'){
+            valor-=0.1;
+            erase();
+            graphic.scale(valor,valor);
+            redraw();            
+        }
+
+    }
 
     /**
      * Draw a given shape onto the canvas.

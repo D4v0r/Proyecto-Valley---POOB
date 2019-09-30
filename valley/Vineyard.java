@@ -29,22 +29,39 @@ public class Vineyard
         filling = new Rectangle();
     }
     
+    /**
+     * retorna el nombre 
+     */
     public String getName(){
         return name;
     }
     
+    /**
+     * retorna la posicion inicial
+     */
     public int getPosition(){
         return xInicial;
     }
     
+    /**
+     * retorna el ancho
+     */
     public int getWidth(){
         return xFinal-xInicial;
     }
     
+    /**
+     * cambia el valor si fue regado
+     * @param boolean action si se rego o no
+     */
     public void water(boolean action){
         isWatered = action;
     }
     
+    /**
+     * retorna si fue regado
+     * @return 
+     */
     public boolean isWatered(){
         return isWatered;
     }
@@ -65,22 +82,34 @@ public class Vineyard
         filling.changeColor(name);
     }
     
+    /**
+     * cierra el viñedo
+     */
     public void close()
     {
         makeInvisible();
         filling = null;
     }
     
+    /**
+     * retorna el color
+     */
     public String getColor(){
         return color;
     }
     
+    /**
+     * hace visible le viñedo si es posible
+     */
     public void makeVisible()
     {
         filling.makeVisible();
         isVisible = true;
     }
     
+    /**
+     * hace invisible el viñedo si es posible
+     */
     public void makeInvisible()
     {
         filling.makeInvisible();

@@ -28,13 +28,19 @@ public class Rain implements Comparable <Rain>{
         double[] point2 = {xPosition,10};
     }
     
+    /**
+     * hace visible la lluvia si es posible
+     */
     public void makeVisible(){
         isVisible = true;
         for(Rectangle gota: stream ){
             gota.makeVisible();
         }
     }
-    
+   
+    /**
+     * hace invisible la lluvia si es posible
+     */
     public void makeInvisible(){
         isVisible = false;
         for(Rectangle gota: stream){
@@ -153,6 +159,11 @@ public class Rain implements Comparable <Rain>{
         return returnValues(colisionWithPuncture,colisionTrap, m);
     }
     
+    /**
+     * retorna los valores (si colisiono) para actuar 
+     * @param colisionWithPuncture si choco algun hueco , colisionTrap si choco alguna lona, pendiente la pendiente
+     * @return double[] una lista con los valores para que actue la lluvia
+     */
     private double[] returnValues(boolean colisionWithPuncture, boolean colisionTrap, double pendiente){
         double[] values={0,0};
         if (colisionWithPuncture){
@@ -164,6 +175,11 @@ public class Rain implements Comparable <Rain>{
         return values;
     }
     
+    /**
+     * verifica si la lluvia esta en una rango x de alguna lona
+     * @param int x0,x1 posiciones de la lona
+     * @return boolean si esta en el rango
+     */
     private boolean estaEnRangoX(int x0,int x1){
         boolean estaEnRangoX =false;
         if (x0<x1){
@@ -174,6 +190,11 @@ public class Rain implements Comparable <Rain>{
         return estaEnRangoX;
     }
     
+    /**
+     * verifica si la lluvia esta en una rango y de alguna lona
+     * @param int y0,y1 las posiciones de la lona
+     * @return boolean si estan en el rango
+     */
     private boolean estaEnRangoY(int y0, int y1){
         boolean estaEnRangoY=false;
         if (y0<y1){
@@ -186,7 +207,7 @@ public class Rain implements Comparable <Rain>{
     
     
     /**
-     * 
+     * retorna la posicion en x
      */
     public double getXPosition(){
         return xPosition;

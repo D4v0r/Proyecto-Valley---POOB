@@ -102,8 +102,26 @@ public class ValleyTestC1
         valley.addTrap(x1,x2);
         valley.makePuncture(1,500);
         assertTrue(valley.getTraps().get(0).getPunctures().size()==0);
-    }    
+    }
     
+    @Test
+    public void deberiaHaberLona(){
+        int[] x1 = {50,150};
+        int[] x2 = {100,100};
+        int[] x3 = {10,15};
+        int[] x4 = {10,90};
+        valley.addTrap(x1,x2);
+        valley.addTrap(x3,x4);
+        assertTrue(valley.getTraps().size()==2);
+    }
+    
+    @Test
+    public void noDeberiaHaberViñedo(){
+        valley.openVineyard("sdsd",50,200);
+        valley.openVineyard("red",200,50);
+        valley.openVineyard("rojo",60,100);
+        assertFalse(valley.getVineyards().size()>0);
+    }
     /**
      * Tears down the test fixture.
      *
