@@ -313,6 +313,19 @@ public class Valley
         canvas.setVisible(isVisible);
         ok=true;
     }
+    /**
+     * Consulta las posiciones de los viñedos
+     * @return query
+     */
+    public int [][] vineyards(){
+        int [][] query = new int [vineyards.size()][2];
+        int i = 0;
+        for(Vineyard v: vineyards){
+            query[i][0] = v.getPosition();
+            query[i][1] = v.getPosition() + v.getWidth();
+        }
+        return query;
+    }
     
     /**
      * retorna las posiciones de las lonas y de los huecos 
