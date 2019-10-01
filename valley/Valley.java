@@ -73,7 +73,7 @@ public class Valley
         }
         if (indice != -2){
             ok=true;
-            vineyards.get(indice).makeInvisible();
+            vineyards.get(indice).close();
             vineyards.remove(indice);
         }
         else{
@@ -223,7 +223,7 @@ public class Valley
         rain.start(x);
         rains.add(rain);
         if(isVisible){
-            draw();
+            rain.makeVisible();
         }
         ok=true;
     }
