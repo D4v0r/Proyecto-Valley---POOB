@@ -11,26 +11,24 @@ import java.lang.*;
 
 
  
-public class Rectangle{
+public class Rectangle extends Shape{
 
     private int height;
     private int width;
     private double xPosition;
     private double yPosition;
-    private String color;
-    private boolean isVisible;
+
     
 
     /**
      * Create a new rectangle at default position with default color.
      */
     public Rectangle(){
+        super();
         height = 10;
         width = 50;
         xPosition = 1;
         yPosition = 1;
-        color = "blue";
-        isVisible = false;
     }
  
     
@@ -58,44 +56,42 @@ public class Rectangle{
      * Make this rectangle visible. If it was already visible, do nothing.
      */
     public void makeVisible(){
-        isVisible = true;
-        draw();
+        super.makeVisible();
     }
     
     /**
      * Make this rectangle invisible. If it was already invisible, do nothing.
      */
     public void makeInvisible(){
-        erase();
-        isVisible = false;
+        super.makeInvisible();
     }
     
     /**
      * Move the rectangle a few pixels to the right.
      */
     public void moveRight(){
-        moveHorizontal(20);
+        super.moveRight();
     }
 
     /**
      * Move the rectangle a few pixels to the left.
      */
     public void moveLeft(){
-        moveHorizontal(-20);
+        super.moveLeft();
     }
 
     /**
      * Move the rectangle a few pixels up.
      */
     public void moveUp(){
-        moveVertical(-20);
+        super.moveUp();
     }
 
     /**
      * Move the rectangle a few pixels down.
      */
     public void moveDown(){
-        moveVertical(20);
+        super.moveDown();
     }
 
     /**
@@ -176,23 +172,22 @@ public class Rectangle{
      * "magenta" and "black".
      */
     public void changeColor(String newColor){
-        color = newColor;
-        draw();
+        super.changeColor(newColor);
     }
     
-    public void randomColor(){
-        String colors[]={"red","yellow","blue","black","brown","magenta","grey","fucsia"};
-        int indice = (int) Math.floor(Math.random() * colors.length);
-        color = colors[indice];
-        draw();
+    // public void randomColor(){
+        // String colors[]={"red","yellow","blue","black","brown","magenta","grey","fucsia"};
+        // int indice = (int) Math.floor(Math.random() * colors.length);
+        // color = colors[indice];
+        // draw();
         
-    }
+    // }
 
     /*
      * Draw the rectangle with current specifications on screen.
      */
 
-    private void draw() {
+    protected void draw() {
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();
             canvas.draw(this, color,
@@ -204,7 +199,7 @@ public class Rectangle{
     /*
      * Erase the rectangle on screen.
      */
-    private void erase(){
+    protected void erase(){
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();
             canvas.erase(this);

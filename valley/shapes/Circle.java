@@ -10,25 +10,22 @@ import java.awt.geom.*;
  * @version 1.0.  (15 July 2000) 
  */
 
-public class Circle{
+public class Circle extends Shape{
 
     public static double PI=3.1416;
     
     private int diameter;
     private double xPosition;
     private double yPosition;
-    private String color;
-    private boolean isVisible;
     
     /**
      * Create a new circle at default position with default color.
      */
     public Circle(){
+        super();
         diameter = 30;
         xPosition = 0;
         yPosition = 0;
-        color = "green";
-        isVisible = false;
     }
     
     public void setXposition(double x){
@@ -43,53 +40,51 @@ public class Circle{
      * Make this circle visible. If it was already visible, do nothing.
      */
     public void makeVisible(){
-        isVisible = true;
-        draw();
+        super.makeVisible();
     }
     
     /**
      * Make this circle invisible. If it was already invisible, do nothing.
      */
     public void makeInvisible(){
-        erase();
-        isVisible = false;
+        super.makeInvisible();
     }
     
     /**
      * Move the circle a few pixels to the right.
      */
     public void moveRight(){
-        moveHorizontal(20);
+        super.moveRight();
     }
 
     /**
      * Move the circle a few pixels to the left.
      */
     public void moveLeft(){
-        moveHorizontal(-20);
+        super.moveLeft();
     }
 
     /**
      * Move the circle a few pixels up.
      */
     public void moveUp(){
-        moveVertical(-20);
+        super.moveUp();
     }
 
     /**
      * Move the circle a few pixels down.
      */
     public void moveDown(){
-        moveVertical(20);
+        super.moveDown();
     }
 
     /**
      * Move the circle horizontally.
      * @param distance the desired distance in pixels
      */
-    public void moveHorizontal(int distance){
+    public void moveHorizontal(double distance){
         erase();
-        xPosition += distance;
+        xPosition += (int) distance;
         draw();
     }
 
@@ -97,9 +92,9 @@ public class Circle{
      * Move the circle vertically.
      * @param distance the desired distance in pixels
      */
-    public void moveVertical(int distance){
+    public void moveVertical(double distance){
         erase();
-        yPosition += distance;
+        yPosition += (int) distance;
         draw();
     }
 
@@ -159,14 +154,13 @@ public class Circle{
      * "magenta" and "black".
      */
     public void changeColor(String newColor){
-        color = newColor;
-        draw();
+        super.changeColor(newColor);
     }
 
     /*
      * Draw the circle with current specifications on screen.
      */
-    private void draw(){
+    protected void draw(){
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();
             canvas.draw(this, color, 
@@ -179,43 +173,11 @@ public class Circle{
     /*
      * Erase the circle on screen.
      */
-    private void erase(){
+    protected void erase(){
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();
             canvas.erase(this);
         }
     }
-    
-    /**
-     * The circle grow up slowy n times
-     * @Param times. times must be >= 0
-     */
-    public void growUp(int times){
-        for(int i= 0; i < times; i++){
-            changeSize( diameter + 5 );
-        }
-        
-    }
-    
-    /**
-     * Circle's area
-     */
-    public double area(){
-        double area;
-        area = PI * (diameter/2) * (diameter/2);
-        return area;
-    }
-    
-    public void jump(){
-        for(int i = 0; i < 30; i++){
-            if (i > 14){
-                slowMoveHorizontal( 1 );
-                slowMoveVertical( 1 );
-            } else {
-                slowMoveHorizontal( 1 );
-                slowMoveVertical( -1 );
-            }
-        }
-        
-    }
+
 }
