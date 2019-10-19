@@ -52,48 +52,7 @@ public class Rectangle extends Shape{
         return yPosition;
     }
     
-    /**
-     * Make this rectangle visible. If it was already visible, do nothing.
-     */
-    public void makeVisible(){
-        super.makeVisible();
-    }
     
-    /**
-     * Make this rectangle invisible. If it was already invisible, do nothing.
-     */
-    public void makeInvisible(){
-        super.makeInvisible();
-    }
-    
-    /**
-     * Move the rectangle a few pixels to the right.
-     */
-    public void moveRight(){
-        super.moveRight();
-    }
-
-    /**
-     * Move the rectangle a few pixels to the left.
-     */
-    public void moveLeft(){
-        super.moveLeft();
-    }
-
-    /**
-     * Move the rectangle a few pixels up.
-     */
-    public void moveUp(){
-        super.moveUp();
-    }
-
-    /**
-     * Move the rectangle a few pixels down.
-     */
-    public void moveDown(){
-        super.moveDown();
-    }
-
     /**
      * Move the rectangle horizontally.
      * @param distance the desired distance in pixels
@@ -165,23 +124,6 @@ public class Rectangle extends Shape{
         width = newWidth;
         draw();
     }
-    
-    /**
-     * Change the color. 
-     * @param color the new color. Valid colors are "red", "yellow", "blue", "green",
-     * "magenta" and "black".
-     */
-    public void changeColor(String newColor){
-        super.changeColor(newColor);
-    }
-    
-    // public void randomColor(){
-        // String colors[]={"red","yellow","blue","black","brown","magenta","grey","fucsia"};
-        // int indice = (int) Math.floor(Math.random() * colors.length);
-        // color = colors[indice];
-        // draw();
-        
-    // }
 
     /*
      * Draw the rectangle with current specifications on screen.

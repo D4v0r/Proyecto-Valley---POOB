@@ -39,18 +39,6 @@ public class Line extends Shape
         return (new double[]{x2, y2});
     }
     
-    public void changeColor(String newColor){
-        super.changeColor(newColor);
-    }
-    
-    public void makeVisible(){
-        super.makeVisible();
-    }
-    
-    public void makeInvisible(){
-        super.makeInvisible();
-    }
-    
     public void moveHorizontal(double distance){
         erase();
         x1 += distance;

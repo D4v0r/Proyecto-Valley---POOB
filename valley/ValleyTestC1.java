@@ -84,24 +84,24 @@ public class ValleyTestC1
     public void deberiaHacerHueco(){
         int[] x1 = {20,10};
         int[] x2 = {100,100};
-        valley.addTrap(x1,x2);
+        valley.addTarp(x1,x2);
         valley.makePuncture(1,50);
-        assertTrue(valley.getTraps().get(0).getPunctures().size()!=0);
+        assertTrue(valley.getTarps().get(0).getPunctures().size()!=0);
         
         valley.makePuncture(1,51);
-        assertTrue(valley.getTraps().get(0).getPunctures().size()==2);
+        assertTrue(valley.getTarps().get(0).getPunctures().size()==2);
         
         valley.makePuncture(1,600);
-        assertTrue(valley.getTraps().get(0).getPunctures().size()==2);
+        assertTrue(valley.getTarps().get(0).getPunctures().size()==2);
     }
     
     @Test
     public void noDeberiaHacerHueco(){
         int[] x1 = {20,10};
         int[] x2 = {100,100};
-        valley.addTrap(x1,x2);
+        valley.addTarp(x1,x2);
         valley.makePuncture(1,500);
-        assertTrue(valley.getTraps().get(0).getPunctures().size()==0);
+        assertTrue(valley.getTarps().get(0).getPunctures().size()==0);
     }
     
     @Test
@@ -110,9 +110,9 @@ public class ValleyTestC1
         int[] x2 = {100,100};
         int[] x3 = {10,15};
         int[] x4 = {10,90};
-        valley.addTrap(x1,x2);
-        valley.addTrap(x3,x4);
-        assertTrue(valley.getTraps().size()==2);
+        valley.addTarp(x1,x2);
+        valley.addTarp(x3,x4);
+        assertTrue(valley.getTarps().size()==2);
     }
     
     @Test

@@ -13,7 +13,8 @@ public class Rain implements Comparable <Rain>{
     private double yPosition;
     private boolean isVisible;
     private ArrayList<Rectangle> stream;
-    private Line line;
+    private Valley valley;
+    private String color;
     
     /**
      * Constructor for objects of class Rain
@@ -24,6 +25,8 @@ public class Rain implements Comparable <Rain>{
         this.xPosition = xPosition;
         yPosition=0;
         stream = new ArrayList<>();
+        color = "blue";
+        valley = Valley.getValley();
         double[] point1 = {xPosition,0};
         double[] point2 = {xPosition,10};
     }
@@ -55,21 +58,22 @@ public class Rain implements Comparable <Rain>{
     public void start(int x){
         int xNow=x;
         boolean noChoco=true;
-        ArrayList<Vineyard> vineyards = Valley.getVineyards();
-        ArrayList<Trap> traps = Valley.getTraps();
-        while (yPosition<Valley.getHeight() && noChoco){
+        ArrayList<Vineyard> vineyards = valley.getVineyards();
+        ArrayList<Tarp> tarps = valley.getTarps();
+        while (yPosition<valley.getHeight() && noChoco){
             Rectangle gota = new Rectangle();
-            if (yPosition >= Valley.getHeight()-10){
+            if (yPosition >= valley.getHeight()-10){
                 int vineyard = vineyardCollision(vineyards, yPosition, xPosition);
                 if( vineyard == -1){
                     noChoco = true;
                 } else {
-                    Valley.water(vineyard);
+                    valley.water(vineyard);
                     noChoco = false;
                 }
             }
-            rainOnTrap(traps,xNow);
+            rainOnTarp(tarps,xNow);
             gota = doRectangle();
+            gota.changeColor(color);
             stream.add(gota);
         }
     }
@@ -89,10 +93,10 @@ public class Rain implements Comparable <Rain>{
     
     /**
      * 
-     * @param traps lista de lonas, la posicion de el agua,
+     * @param tarps lista de lonas, la posicion de el agua,
      */
-    private void rainOnTrap(ArrayList<Trap> traps, int xNow){
-        double rta[] = collisionWith(traps,xNow);
+    private void rainOnTarp(ArrayList<Tarp> tarps, int xNow){
+        double rta[] = collisionWith(tarps,xNow);
         if (rta[0]==2.0){
             yPosition++;
         }
@@ -116,7 +120,7 @@ public class Rain implements Comparable <Rain>{
      */
     private int vineyardCollision(ArrayList<Vineyard> vineyards, double y, double x){
         int vineyard = -1;
-        int vineyardPositionY = Valley.getHeight() - 10; 
+        int vineyardPositionY = valley.getHeight() - 10; 
         for (Vineyard v : vineyards){
             if (vineyardPositionY >=y && x>=v.getPosition() && x<=v.getWidth()){
                 vineyard = vineyards.indexOf(v);
@@ -127,48 +131,48 @@ public class Rain implements Comparable <Rain>{
 
     /**
      * Verifica la colision de la lluvia con alguna lona
-     * @param traps la lista de lonas, 
+     * @param tarps la lista de lonas, 
      * 
      */
-    private double[] collisionWith(ArrayList<Trap> traps,double xNow){
-        boolean colisionTrap=false;
+    private double[] collisionWith(ArrayList<Tarp> tarps,double xNow){
+        boolean colisionTarp=false;
         boolean colisionWithPuncture=false;
         double m=0.0;
         double b=0.0;
         int pos=0;
         boolean estaEnRangoX;
         boolean estaEnRangoY;
-        while (!colisionTrap && pos<traps.size()){
-            int x0 = traps.get(pos).getLowerEnd()[0];
-            int y0 = traps.get(pos).getLowerEnd()[1];
-            int x1 = traps.get(pos).getHigherEnd()[0];
-            int y1 = traps.get(pos).getHigherEnd()[1];
+        while (!colisionTarp && pos<tarps.size()){
+            int x0 = tarps.get(pos).getLowerEnd()[0];
+            int y0 = tarps.get(pos).getLowerEnd()[1];
+            int x1 = tarps.get(pos).getHigherEnd()[0];
+            int y1 = tarps.get(pos).getHigherEnd()[1];
             m = (double) (y1-y0)/(x1-x0);
             b = y0-(m*x0);
             double y = (double) (m*xPosition)+b;
             estaEnRangoX= estaEnRangoX(x0,x1);
             estaEnRangoY= estaEnRangoY(y0,y1);
-            if (yPosition>=(Valley.getHeight()-y-10) && estaEnRangoX && estaEnRangoY){
-                colisionTrap=true;
-                if (traps.get(pos).collisionPuncture((int)xPosition)){
+            if (yPosition>=(valley.getHeight()-y-10) && estaEnRangoX && estaEnRangoY){
+                colisionTarp=true;
+                if (tarps.get(pos).collisionPuncture((int)xPosition)){
                     colisionWithPuncture=true;
                 }
             }
             pos++;
         }
-        return returnValues(colisionWithPuncture,colisionTrap, m);
+        return returnValues(colisionWithPuncture,colisionTarp, m);
     }
     
     /**
      * retorna los valores (si colisiono) para actuar 
-     * @param colisionWithPuncture si choco algun hueco , colisionTrap si choco alguna lona, pendiente la pendiente
+     * @param colisionWithPuncture si choco algun hueco , colisionTarp si choco alguna lona, pendiente la pendiente
      * @return double[] una lista con los valores para que actue la lluvia
      */
-    private double[] returnValues(boolean colisionWithPuncture, boolean colisionTrap, double pendiente){
+    private double[] returnValues(boolean colisionWithPuncture, boolean colisionTarp, double pendiente){
         double[] values={0,0};
         if (colisionWithPuncture){
             values[0]=2.0;
-        } else if (colisionTrap){
+        } else if (colisionTarp){
             values[0]=1.0;
             values[1]=pendiente;
         }
@@ -198,9 +202,9 @@ public class Rain implements Comparable <Rain>{
     private boolean estaEnRangoY(int y0, int y1){
         boolean estaEnRangoY=false;
         if (y0<y1){
-            estaEnRangoY=(Valley.getHeight()-yPosition>=y0 && Valley.getHeight()-yPosition<=y1);
+            estaEnRangoY=(valley.getHeight()-yPosition>=y0 && valley.getHeight()-yPosition<=y1);
         } else{
-            estaEnRangoY=(Valley.getHeight()-yPosition>=y1 && Valley.getHeight()-yPosition<=y0);
+            estaEnRangoY=(valley.getHeight()-yPosition>=y1 && valley.getHeight()-yPosition<=y0);
         }
         return estaEnRangoY;
     }

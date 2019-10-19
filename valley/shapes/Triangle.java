@@ -26,48 +26,7 @@ public class Triangle  extends Shape {
         yPosition = 15;
     }
 
-    /**
-     * Make this triangle visible. If it was already visible, do nothing.
-     */
-    public void makeVisible(){
-        super.makeVisible();
-    }
     
-    /**
-     * Make this triangle invisible. If it was already invisible, do nothing.
-     */
-    public void makeInvisible(){
-        super.makeInvisible();
-    }
-     
-    /**
-     * Move the triangle a few pixels to the right.
-     */
-    public void moveRight(){
-        super.moveRight();
-    }
-
-    /**
-     * Move the triangle a few pixels to the left.
-     */
-    public void moveLeft(){
-        super.moveLeft();
-    }
-
-    /**
-     * Move the triangle a few pixels up.
-     */
-    public void moveUp(){
-        super.moveUp();
-    }
-
-    /**
-     * Move the triangle a few pixels down.
-     */
-    public void moveDown(){
-        super.moveDown();
-    }
-
     /**
      * Move the triangle horizontally.
      * @param distance the desired distance in pixels
@@ -140,15 +99,6 @@ public class Triangle  extends Shape {
         draw();
     }
     
-    /**
-     * Change the color. 
-     * @param color the new color. Valid colors are "red", "yellow", "blue", "green",
-     * "magenta" and "black".
-     */
-    public void changeColor(String newColor){
-        super.changeColor(newColor);
-    }
-
     protected void draw(){
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();

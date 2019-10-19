@@ -26,16 +26,16 @@ public class ValleyTestC2
     }
     
     @Test
-    public void consultaTraps(){
+    public void consultaTarps(){
         int[][][] esperado =  {{{50,100},{100,200},{70}},{{150,100},{200,200},{170, 190}}};
         int [][] datosT1 = {{50,100},{100,200},{70}};
         int [][] datosT2 = {{150,100},{200,200},{170, 190}};
-        valley.addTrap(datosT1[0], datosT1[1]);
+        valley.addTarp(datosT1[0], datosT1[1]);
         valley.makePuncture(1, datosT1[2][0]);
-        valley.addTrap(datosT2[0], datosT2[1]);
+        valley.addTarp(datosT2[0], datosT2[1]);
         valley.makePuncture(2, datosT2[2][0]);
         valley.makePuncture(2, datosT2[2][1]);
-        assertEquals(valley.traps(), esperado);
+        assertEquals(valley.tarps(), esperado);
         
     }
     
@@ -45,8 +45,8 @@ public class ValleyTestC2
         int[] x1 = {450,300};
         int[] x2 = {300,400};
         int[] x3 = {400,330};
-        valley.addTrap(x0,x1);
-        valley.addTrap(x2,x3);
+        valley.addTarp(x0,x1);
+        valley.addTarp(x2,x3);
         valley.openVineyard("red",300,400);
         valley.startRain(330);
         assertFalse(valley.getVineyards().get(0).isWatered());
@@ -58,12 +58,12 @@ public class ValleyTestC2
         int[] x1 = {450,300};
         int[] x2 = {300,400};
         int[] x3 = {400,330};
-        valley.addTrap(x0,x1);
-        valley.addTrap(x2,x3);
+        valley.addTarp(x0,x1);
+        valley.addTarp(x2,x3);
         valley.makePuncture(1,225);
         valley.makePuncture(4,123);
         valley.makePuncture(2,310);
-        assertTrue(valley.getTraps().get(0).getPunctures().size()==1);
+        assertTrue(valley.getTarps().get(0).getPunctures().size()==1);
     }
      
     @Test
@@ -72,12 +72,12 @@ public class ValleyTestC2
         int[] x1 = {450,300};
         int[] x2 = {300,400};
         int[] x3 = {400,330};
-        valley.addTrap(x0,x1);
-        valley.addTrap(x2,x3);
+        valley.addTarp(x0,x1);
+        valley.addTarp(x2,x3);
         valley.makePuncture(1,455);
         valley.makePuncture(1,123);
         valley.makePuncture(2,299);
-        assertFalse(valley.getTraps().get(0).getPunctures().size()==1);
+        assertFalse(valley.getTarps().get(0).getPunctures().size()==1);
     }
     
     @Test
@@ -86,8 +86,8 @@ public class ValleyTestC2
         int[] x1 = {450,300};
         int[] x2 = {300,400};
         int[] x3 = {400,330};
-        valley.addTrap(x0,x1);
-        valley.addTrap(x2,x3);
+        valley.addTarp(x0,x1);
+        valley.addTarp(x2,x3);
         valley.openVineyard("red",50,200);
         valley.startRain(330);
         assertTrue(!valley.getVineyards().get(0).isWatered());

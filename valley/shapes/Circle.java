@@ -35,48 +35,6 @@ public class Circle extends Shape{
     public void setYPosition(double y){
         yPosition=y;
     }
-    
-    /**
-     * Make this circle visible. If it was already visible, do nothing.
-     */
-    public void makeVisible(){
-        super.makeVisible();
-    }
-    
-    /**
-     * Make this circle invisible. If it was already invisible, do nothing.
-     */
-    public void makeInvisible(){
-        super.makeInvisible();
-    }
-    
-    /**
-     * Move the circle a few pixels to the right.
-     */
-    public void moveRight(){
-        super.moveRight();
-    }
-
-    /**
-     * Move the circle a few pixels to the left.
-     */
-    public void moveLeft(){
-        super.moveLeft();
-    }
-
-    /**
-     * Move the circle a few pixels up.
-     */
-    public void moveUp(){
-        super.moveUp();
-    }
-
-    /**
-     * Move the circle a few pixels down.
-     */
-    public void moveDown(){
-        super.moveDown();
-    }
 
     /**
      * Move the circle horizontally.
@@ -146,15 +104,6 @@ public class Circle extends Shape{
         erase();
         diameter = newDiameter;
         draw();
-    }
-
-    /**
-     * Change the color. 
-     * @param color the new color. Valid colors are "red", "yellow", "blue", "green",
-     * "magenta" and "black".
-     */
-    public void changeColor(String newColor){
-        super.changeColor(newColor);
     }
 
     /*

@@ -72,12 +72,12 @@ public class Vineyard
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
      */
-    public void open()
+    public void open(int limit)
     {
         // put your code here
-        int limitHeight = Valley.getHeight();
+        int limitHeight = limit;
         filling.moveHorizontal(xInicial);
-        filling.moveVertical(limitHeight-5);
+        filling.moveVertical(limit-5);
         filling.changeSize(5, xFinal - xInicial);
         filling.changeColor(name);
     }

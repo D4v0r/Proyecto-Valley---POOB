@@ -14,14 +14,15 @@ import shapes.*;
  * @version (a version number or a date)
  */
 public class Valley
-{
+{    
     private static int width,height;
     private static ArrayList<Vineyard> vineyards;
     private ArrayList<Rain> rains;
-    private static ArrayList<Trap> traps;
+    private static ArrayList<Tarp> tarps;
     private boolean isVisible;
     private boolean ok;
     private Canvas canvas;
+    private static Valley instance;
     
     
     /**
@@ -34,8 +35,13 @@ public class Valley
         this.width=width;
         this.height=height;
         isVisible = false;
-        traps= new ArrayList<>();
+        tarps= new ArrayList<>();
+        instance = this;
 
+    }
+    
+    public static Valley getValley(){
+        return instance;
     }
     
     /**
@@ -51,7 +57,7 @@ public class Valley
             ok=false;
         } else {
             Vineyard v = new Vineyard(name, xi, xf);
-            v.open();
+            v.open(height);
             if (isVisible){
                 v.makeVisible();
             }
@@ -115,24 +121,49 @@ public class Valley
      * Agrega una lona en el valle con respecto a sus puntos
      * @param lowerEnd son los puntos mas bajos de la lona, higherEnd son los puntos mas altos de la lona
      */
-    public void addTrap(int[] lowerEnd, int[] higherEnd){
-        Trap t = new Trap(lowerEnd, higherEnd);
+    public void addTarp(int[] lowerEnd, int[] higherEnd){
+        Tarp t = new Tarp(lowerEnd, higherEnd);
         if (isVisible){
             t.makeVisible();
         }
-        traps.add(t);
+        tarps.add(t);
+    }
+    
+    public void addTarp(String type, int[] lowerEnd, int[] higherEnd){
+        Tarp t = null;
+        switch( type ){
+            case "radical":
+                t = new Radical(lowerEnd, higherEnd);
+                break;
+            case "hard":
+                t = new Hard(lowerEnd, higherEnd);
+                break;
+            case "temporal":
+                t = new Temporal(lowerEnd, higherEnd);
+                break;
+            case "flexible":
+                t = new Flexible(lowerEnd, higherEnd);
+                break;
+            default:
+                t = new Tarp(lowerEnd, higherEnd);
+                
+        }
+        if (isVisible){
+            t.makeVisible();
+        }
+        tarps.add(t);
     }
     
     /**
      * Elimina una lona 
      * @param position que es la posicion de la lista de lonas
      */
-    public void removeTrap(int position){
+    public void removeTarp(int position){
         position--;
-        Collections.sort(traps);
-        if (position<=traps.size()){
-            traps.get(position).remove();
-            traps.remove(position);
+        Collections.sort(tarps);
+        if (position<=tarps.size()){
+            tarps.get(position).remove();
+            tarps.remove(position);
             ok=true;
         }
         else{
@@ -145,20 +176,20 @@ public class Valley
     
     /**
      * Agrega un hueco en una lona
-     * @param trap es la ubicacion de la lona en la lista, x la posicion de la misma
+     * @param tarp es la ubicacion de la lona en la lista, x la posicion de la misma
      */
    
-    public void makePuncture(int trap, int x){
-        trap--;
-        if  (trap > traps.size()){
+    public void makePuncture(int tarp, int x){
+        tarp--;
+        if  (tarp > tarps.size()){
             if (isVisible){
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null, "numero de lona incorrecto");
             }
             ok = false;
         } else {
-            Collections.sort(traps);
-            Trap t = traps.get(trap);
+            Collections.sort(tarps);
+            Tarp t = tarps.get(tarp);
             if((x >= t.getLowerEnd()[0] && x <= t.getHigherEnd()[0]) || (x >= t.getHigherEnd()[0] && x <= t.getLowerEnd()[0])){        
                 t.makePuncture(x);
                 ok=true;
@@ -174,19 +205,19 @@ public class Valley
     
     /**
      * tapa un hueco si es posible
-     * @param trap la lona, x la posicion del hueco
+     * @param tarp la lona, x la posicion del hueco
      */
-    public void patchPuncture(int trap, int x){
-        trap--;
-        if  (trap > traps.size()){
+    public void patchPuncture(int tarp, int x){
+        tarp--;
+        if  (tarp > tarps.size()){
             if (isVisible){
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null, "numero de lona incorrecto");
             }
             ok = false;
         } else {
-            Collections.sort(traps);
-            Trap t = traps.get(trap);
+            Collections.sort(tarps);
+            Tarp t = tarps.get(tarp);
             if((x >= t.getLowerEnd()[0] && x <= t.getHigherEnd()[0]) || (x >= t.getHigherEnd()[0] && x <= t.getLowerEnd()[0])){        
                 t.patchPuncture(x);
                 ok=true;
@@ -267,7 +298,7 @@ public class Valley
             v.makeVisible();
         }
         
-        for (Trap t : traps){
+        for (Tarp t : tarps){
             t.makeVisible();
         }
         
@@ -279,14 +310,14 @@ public class Valley
     /**
      * 
      */
-    public static void water(int position){
+    public void water(int position){
         vineyards.get(position).water(true);
     }
     
     /**
      * retorna el alto del vally
      */
-    public static int getHeight(){
+    public int getHeight(){
         return height;
     }
     
@@ -294,14 +325,14 @@ public class Valley
     /**
      * retorna las lonas
      */
-    public static ArrayList<Trap> getTraps(){
-        return traps;
+    public ArrayList<Tarp> getTarps(){
+        return tarps;
     }
     
     /**
      * retorna los viñedos
      */
-    public static ArrayList<Vineyard> getVineyards(){
+    public ArrayList<Vineyard> getVineyards(){
         return vineyards;
     }
     
@@ -331,10 +362,10 @@ public class Valley
      * retorna las posiciones de las lonas y de los huecos 
      * @return una matriz con listas de las posiciones de las lonas consus huecos
      */
-    public int [][][] traps(){
-        int [][][] query = new int [traps.size()][3][];
+    public int [][][] tarps(){
+        int [][][] query = new int [tarps.size()][3][];
         int i = 0;
-        for(Trap t: traps){
+        for(Tarp t: tarps){
             for(int j = 0; j < 3; j++){
                 if(j == 0){
                     query[i][j] = new int[2];
@@ -393,5 +424,8 @@ public class Valley
     public boolean ok(){
         return ok;
     }
-
+    
+    public void waitValley(){
+        canvas.wait(1000);
+    }
 }

@@ -5,12 +5,12 @@ import java.awt.geom.*;
 import javax.swing.JOptionPane;
 import java.awt.Toolkit;
 /**
- * Write a description of class Trap here.
+ * Write a description of class Tarp here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Trap implements Comparable <Trap>
+public class Tarp implements Comparable <Tarp>
 {
     private int[] lowerEnd;
     private int[] higherEnd;
@@ -18,26 +18,29 @@ public class Trap implements Comparable <Trap>
     private boolean isVisible;
     private String color;
     private Line line;
+    private Valley valley;
     
 
     /**
-     * Constructor for objects of class Trap
+     * Constructor for objects of class Tarp
      */
-    public Trap(int[] lowerEnd, int[] higherEnd){
+    public Tarp(int[] lowerEnd, int[] higherEnd){
         isVisible=false;
         color="black";
         this.lowerEnd = lowerEnd;
         this.higherEnd = higherEnd;
         punctures= new ArrayList<>();
-        int limitHeight = Valley.getHeight();
+        valley = Valley.getValley();
+        int limitHeight = valley.getHeight();
         double [] point1 = { (double) lowerEnd[0], (double) (limitHeight - lowerEnd[1])};
         double [] point2 = { (double) higherEnd[0], (double) (limitHeight - higherEnd[1])};
         line = new Line(point1, point2);
+        line.changeColor(color);
         belongingTo(this.lowerEnd[0], this.higherEnd[0]);
     }
     
     public void belongingTo(int x1, int x2){
-        ArrayList<Vineyard> vineyards = Valley.getVineyards();
+        ArrayList<Vineyard> vineyards = valley.getVineyards();
         for(Vineyard v: vineyards){
             int xi = v.getPosition();
             int xf = v.getPosition() + v.getWidth();
@@ -84,11 +87,11 @@ public class Trap implements Comparable <Trap>
     
     /**
      * Agrega un hueco en una lona
-     * @param trap es la ubicacion de la lona en la lista, x la posicion de la misma
+     * @param tarp es la ubicacion de la lona en la lista, x la posicion de la misma
      */
     public void makePuncture(int x){
         double y = rectFunction((double) x);
-        double limitHeight = (double) Valley.getHeight();
+        double limitHeight = (double) valley.getHeight();
         Puncture p = new Puncture(x , limitHeight - y);
         punctures.add(p);
         p.open();
@@ -173,9 +176,9 @@ public class Trap implements Comparable <Trap>
     }
     
     @Override 
-    public int compareTo(Trap otherTrap){
-        int x1 = otherTrap.getLowerEnd()[0];
-        int x2 = otherTrap.getHigherEnd()[0];
+    public int compareTo(Tarp otherTarp){
+        int x1 = otherTarp.getLowerEnd()[0];
+        int x2 = otherTarp.getHigherEnd()[0];
         if (x1 < lowerEnd[0] || x2 < higherEnd[0]){
             return 0;
         }else if(x1 == lowerEnd[0] && x2 == higherEnd[0]){
