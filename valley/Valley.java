@@ -15,10 +15,10 @@ import shapes.*;
  */
 public class Valley
 {    
-    private static int width,height;
-    private static ArrayList<Vineyard> vineyards;
+    private int width,height;
+    private ArrayList<Vineyard> vineyards;
     private ArrayList<Rain> rains;
-    private static ArrayList<Tarp> tarps;
+    private ArrayList<Tarp> tarps;
     private boolean isVisible;
     private boolean ok;
     private Canvas canvas;
