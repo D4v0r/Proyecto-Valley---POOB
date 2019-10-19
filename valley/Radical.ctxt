@@ -4,4 +4,6 @@ comment0.text=\r\n\ Write\ a\ description\ of\ class\ Radical\ here.\r\n\ \r\n\ 
 comment1.params=lowerEnd\ higherEnd
 comment1.target=Radical(int[],\ int[])
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Radical\r\n
-numComments=2
+comment2.params=x
+comment2.target=void\ makePuncture(int)
+numComments=3

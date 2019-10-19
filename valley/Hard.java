@@ -14,6 +14,18 @@ public class Hard extends Tarp
     public Hard(int []lowerEnd, int []higherEnd)
     {
         super(lowerEnd, higherEnd );
+        changeColor("blue");
     }
 
+    @Override
+    public void makePuncture(int x){
+    }
+    
+    @Override
+    public void remove(){
+    }
+    
+    @Override
+    public void makeInvisible(){
+    }
 }

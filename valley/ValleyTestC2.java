@@ -36,7 +36,6 @@ public class ValleyTestC2
         valley.makePuncture(2, datosT2[2][0]);
         valley.makePuncture(2, datosT2[2][1]);
         assertEquals(valley.tarps(), esperado);
-        
     }
     
     @Test

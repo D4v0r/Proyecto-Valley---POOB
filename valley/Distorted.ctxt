@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=Distorted
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ distorted\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=xPosition
+comment1.target=Distorted(int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ distorted\r\n
+comment2.params=x
+comment2.target=void\ start(int)
+comment3.params=vineyards\ y\ x
+comment3.target=boolean\ vineyardCollision(java.util.ArrayList,\ double,\ double)
+comment3.text=\r\n\ retorna\ si\ colisiono\ con\ un\ vi\u00F1edo\r\n\ @param\r\n\ @return\ \r\n
+comment4.params=traps\ xNow
+comment4.target=double[]\ collisionWith(java.util.ArrayList,\ double)
+comment4.text=\r\n\ retorna\ si\ colisiono\ con\ una\ lona\r\n
+comment5.params=x
+comment5.target=int\ newUbication(int)
+comment5.text=\r\n\ Reubica\ la\ posicion\ en\ x\ de\ la\ lluvia\ tal\ que\ colisione\ con\ una\ lona\r\n\ pero\ no\ con\ un\ vi\u00F1edo\r\n\ @param\ x\ la\ posicion\ actual\ de\ la\ lona\r\n\ @return\ la\ nueva\ posicion\ en\ x\r\n
+comment6.params=t
+comment6.target=boolean\ colitionVineyard(Tarp)
+numComments=7

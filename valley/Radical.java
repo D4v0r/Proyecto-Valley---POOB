@@ -14,6 +14,10 @@ public class Radical extends Tarp
     public Radical(int []lowerEnd, int []higherEnd)
     {
         super(lowerEnd, higherEnd );
+        changeColor("yellow");
     }
 
+    public void makePuncture(int x){
+        remove();
+    }
 }

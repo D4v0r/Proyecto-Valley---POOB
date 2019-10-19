@@ -57,8 +57,8 @@ public abstract class Shape
      * @return
      */
     public  void makeInvisible(){
-        isVisible = false;
         erase();
+        isVisible = false;
     }
     
     /**

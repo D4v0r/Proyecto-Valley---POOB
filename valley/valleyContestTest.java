@@ -46,6 +46,20 @@ public class valleyContestTest
         int [][]traps=new int[][]{{25,10,50,55}};
         assertTrue(va.solve(vineyard,traps)==0);
     }
+    
+    @Test
+    public void deberiaDar2Caso1Arena(){
+        int []vineyard= new int[]{10,20,5};
+        int [][]traps=new int[][]{{35,50,12,60},{30,60,8,70},{25,70,0,80},{15,30,28,40},{5,20,14,25}};
+        assertTrue(va.solve(vineyard,traps)==2);
+    }
+    
+    @Test
+    public void deberiaDar1Caso2Arena(){
+        int []vineyard= new int[]{2,4,2};
+        int [][]traps=new int[][]{{3,2,0,3},{5,2,1,5}};
+        assertTrue(va.solve(vineyard,traps)==1);
+    }    
 
     /**
      * Sets up the test fixture.

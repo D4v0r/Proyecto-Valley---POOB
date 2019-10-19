@@ -28,6 +28,10 @@ public class Vineyard
         color = name;
         filling = new Rectangle();
     }
+
+    public int getPositionY(){
+        return (int)filling.getPositionY();
+    }
     
     /**
      * retorna el nombre 

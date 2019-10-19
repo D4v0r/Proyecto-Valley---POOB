@@ -51,6 +51,10 @@ public class Tarp implements Comparable <Tarp>
         }
     } 
     
+    public int getHeightValley(){
+        return valley.getHeight();
+    }
+    
     /**
      * retorna las posiciones iniciales 
      */
@@ -70,6 +74,26 @@ public class Tarp implements Comparable <Tarp>
      */
     public ArrayList<Puncture> getPunctures(){
         return punctures;
+    }
+    
+    public void invisiblePuncture(){
+        punctures.get(0).makeInvisible();
+    }
+    
+    public void clearPunctures(){
+        punctures.clear();
+    }
+    
+    public void addPunctures(Puncture p){
+        punctures.add(p);
+    }
+    
+    public boolean getisVisible(){
+        return isVisible;
+    }
+    
+    public Line getLine(){
+        return line;
     }
     
     /**
@@ -139,9 +163,9 @@ public class Tarp implements Comparable <Tarp>
      * borra una lona
      */
     public void remove(){
-        makeInvisible();
         punctures = null;
-        line = null;
+        line = null;        
+        makeInvisible();
     }
     
     /**

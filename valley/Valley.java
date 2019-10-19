@@ -130,6 +130,7 @@ public class Valley
     }
     
     public void addTarp(String type, int[] lowerEnd, int[] higherEnd){
+        type=type.toLowerCase();
         Tarp t = null;
         switch( type ){
             case "radical":
@@ -257,6 +258,29 @@ public class Valley
             rain.makeVisible();
         }
         ok=true;
+    }
+    
+    /**
+     * Empieza a caer la lluvia
+     * @param type el tipo de lluvia,x represeta la posicion en donde empieza la lluvia
+     */
+    public void startRain(String type,int x){
+        type=type.toLowerCase();
+        Rain rain;
+        if (type.equals("acid")){
+            rain = new Acid(x);
+        } else if (type.equals("straight")){
+            rain = new Straight(x);
+        } else if (type.equals("distorted")){
+            rain = new Distorted(x);
+        }else{
+            rain = new Rain(x);
+        }
+        rain.start(x);
+        rains.add(rain);
+        if (isVisible){
+            rain.makeVisible();
+        }
     }
     
     /**

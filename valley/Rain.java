@@ -32,6 +32,13 @@ public class Rain implements Comparable <Rain>{
     }
     
     /**
+     * cambia el color
+     */
+    public void changeColor(String color){
+        this.color=color;
+    }
+    
+    /**
      * hace visible la lluvia si es posible
      */
     public void makeVisible(){
@@ -83,7 +90,7 @@ public class Rain implements Comparable <Rain>{
      */
     private Rectangle doRectangle(){
         Rectangle rect = new Rectangle();
-        rect.changeColor("blue");
+        rect.changeColor(color);
         rect.moveHorizontal(xPosition);
         rect.changeSize(5,5);
         rect.setXposition(xPosition);
@@ -127,6 +134,14 @@ public class Rain implements Comparable <Rain>{
             }
         }
         return vineyard;
+    }
+    
+    public boolean stillFalling(){
+        boolean rta=true;
+        if (yPosition>=valley.getHeight()){
+            rta=false;
+        }
+        return rta;
     }
 
     /**
@@ -209,6 +224,45 @@ public class Rain implements Comparable <Rain>{
         return estaEnRangoY;
     }
     
+    public int getHeightValley(){
+        return valley.getHeight();
+    }
+    
+    public double getxPosition(){
+        return xPosition;
+    }
+    
+    public void setxPosition(double valor){
+        xPosition+=valor;
+    }
+    
+    public double getyPosition(){
+        return yPosition;
+    }
+    
+    public void setyPosition(double valor){
+        yPosition+=valor;
+    }
+    
+    public ArrayList<Tarp> getTarps(){
+        return valley.getTarps();
+    }
+    
+    public ArrayList<Vineyard> getVineyards(){
+        return valley.getVineyards();
+    }
+    
+    public void addStream(Rectangle valor){
+        stream.add(valor);
+    }
+    
+    public String getColor(){
+        return color;
+    }
+    
+    public ArrayList<Rectangle> getStream(){
+        return stream;
+    }
     
     /**
      * retorna la posicion en x
