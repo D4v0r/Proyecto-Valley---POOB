@@ -1,7 +1,13 @@
 #BlueJ class context
 comment0.target=Temporal
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Temporal\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Tarp\ Temporal,\ este\ tipo\ de\ lona\ no\ permite\ hacer\ huecos\ y\ su\ visibilidad\ es\ temporal.\r\n\ \r\n\ @author\ Davor\ Cort\u00E9s\ -\ David\ Otalora\ \r\n\ @version\ 1\r\n
 comment1.params=lowerEnd\ higherEnd
 comment1.target=Temporal(int[],\ int[])
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Temporal\r\n
-numComments=2
+comment2.params=
+comment2.target=void\ makeVisible()
+comment3.params=x
+comment3.target=void\ makePuncture(int)
+comment4.params=x
+comment4.target=void\ patchPuncture(int)
+numComments=5
